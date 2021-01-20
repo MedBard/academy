@@ -7,15 +7,12 @@ public class Cat {
 	char initials;
 	boolean isHomeAnimal;
 
-	public static void main(String[] args) {
-
-	}
-
 	public Cat() {
-
+		super();
 	}
 
 	public Cat(String nickname) {
+		super();
 		this.nickname = nickname;
 		setInitials(nickname.charAt(0));
 	}
