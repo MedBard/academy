@@ -1,4 +1,4 @@
-package by.academy.homework1;
+package by.academy.homework.hw1;
 
 import java.util.Scanner;
 
@@ -12,11 +12,11 @@ public class Task3 {
 		do {
 			System.out.println("Print num:");
 			while (!sc.hasNextInt()) {
-				sc.nextLine(); // clear the invalid input before prompting again
-				System.out.print("Please enter your number correctly:");
+				sc.nextLine();
+				System.out.println("Please enter your number correctly:");
 			}
 			num = sc.nextInt();
-			System.out.print("Please enter your number correctly(1-10):");
+			System.out.println("Please enter your number correctly(1-10):");
 		} while (num < 0 || num > 10);
 
 		for (int i = 1; i <= 10; i++) {

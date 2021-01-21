@@ -1,4 +1,4 @@
-package by.academy.homework1;
+package by.academy.homework.hw1;
 
 import java.util.Scanner;
 
@@ -10,13 +10,7 @@ public class Task2 {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Print type of argument:");
-		
-		while (!type.equals("string") || !type.equals("int") || !type.equals("double") || !type.equals("float") || !type.equals("char")) {
-			type = sc.next();
-			sc.nextLine(); // clear the invalid input before prompting again
-			System.out.print("Please type of argument: " + type);
-		}
-		
+		type = sc.next();
 		System.out.println("Print argument:");
 
 		switch (type) {

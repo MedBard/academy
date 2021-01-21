@@ -1,4 +1,4 @@
-package by.academy.lesson1;
+package by.academy.homework.hw1;
 
 public class Cat {
 	int age;
@@ -9,12 +9,14 @@ public class Cat {
 
 	public Cat() {
 		super();
+		setIsHomeAnimal(false);
 	}
 
 	public Cat(String nickname) {
 		super();
 		this.nickname = nickname;
-		setInitials(nickname.charAt(0));
+		setInitials(nickname);
+		setIsHomeAnimal(true);
 	}
 
 	public void grow() {
@@ -45,8 +47,8 @@ public class Cat {
 		System.out.println(initials);
 	}
 
-	public void setInitials(char init) {
-		initials = init;
+	public void setInitials(String nickname) {
+		initials = nickname.charAt(0);
 	}
 
 	public void isHomeAnimal() {
