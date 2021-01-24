@@ -4,41 +4,46 @@ import java.util.Scanner;
 
 public class Task2 {
 
-	public static void main(String[] args) {
+	public enum TypeOfVariable {
+		STRING, INT, DOUBLE, FLOAT, CHAR
+	}
 
-		String type = "";
+	public static void main(String[] args) {
+		String inputType;
+		TypeOfVariable type;
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Print type of argument:");
-		type = sc.next();
+		inputType = sc.next();
+		type = TypeOfVariable.valueOf(inputType.toUpperCase());
 		System.out.println("Print argument:");
 
 		switch (type) {
-		case "string": {
+		case STRING: {
 			String variable;
 			variable = sc.next();
 			System.out.println("Hello " + variable);
 			break;
 		}
-		case "int": {
+		case INT: {
 			int variable;
 			variable = sc.nextInt();
 			System.out.println(variable % 2);
 			break;
 		}
-		case "double": {
+		case DOUBLE: {
 			double variable;
 			variable = sc.nextDouble();
 			System.out.println(variable * 0.7);
 			break;
 		}
-		case "float": {
+		case FLOAT: {
 			float variable;
 			variable = sc.nextFloat();
 			System.out.println(variable * variable);
 			break;
 		}
-		case "char": {
+		case CHAR: {
 			char variable;
 			variable = sc.next().charAt(0);
 			System.out.println((int) variable);

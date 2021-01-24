@@ -24,15 +24,15 @@ public class Cat {
 	}
 
 	public void sleep() {
-		System.out.println("Mrrrrrr");
+		System.out.println("Cat "+ nickname +" sleep");
 	}
 
 	public void eat() {
-		System.out.println("Omnomnom");
+		System.out.println("Cat "+ nickname +" eat");
 	}
 
 	public void walk() {
-		System.out.println("Cat walk");
+		System.out.println("Cat "+ nickname +" walk");
 	}
 
 	public void getMoney() {

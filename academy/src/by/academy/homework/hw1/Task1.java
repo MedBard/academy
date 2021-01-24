@@ -8,11 +8,11 @@ public class Task1 {
 
 		double sum = 0;
 		int age = 0;
-		int discount = 0;
+		float discount = 0;
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("Enter your sum: ");
-		while (!sc.hasNextDouble()) {
+		while (!sc.hasNextDouble()) { // check for invalid type of sum
 			sc.nextLine();
 			System.out.print("Please enter your sum in numbers: ");
 		}
@@ -20,17 +20,18 @@ public class Task1 {
 		sc.nextLine();
 
 		System.out.print("Please enter your age: ");
-		while (!sc.hasNextInt()) {
+		while (!sc.hasNextInt()) { // check for invalid type of age
 			sc.nextLine();
 			System.out.print("Please enter your age in number:");
 		}
 		age = sc.nextInt();
 
-		if (sum >= 400) {
+		if (sum < 0) {
+			System.out.println("Sum < 0!");
+		} else if (sum >= 400) {
 			discount = 20;
 		} else if ((sum >= 300)) {
 			discount = 15;
-
 		} else if ((sum >= 200)) {
 			discount = 12;
 			if (age >= 18) {
@@ -40,12 +41,11 @@ public class Task1 {
 			}
 		} else if ((sum >= 100)) {
 			discount = 7;
-		} else if (sum > 0) {
-			discount = 5;
 		} else {
-			System.out.println("Sum < 0!");
+			discount = 5;
 		}
-
+		
+		// Print result without discount
 		System.out.println("Total price: " + ((sum * (100 - discount)) / 100));
 		sc.close();
 	}
