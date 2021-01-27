@@ -14,7 +14,6 @@ public class Task3 {
 		for (; num > 1; num--) {
 			result *=num;
 		}
-		
 		System.out.println(result);
 		sc.close();
 	}

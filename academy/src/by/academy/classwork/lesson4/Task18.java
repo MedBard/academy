@@ -6,7 +6,5 @@ public class Task18 {
 		int num = 1;
 		int counter =0;
 		for(;;) {}
-
 	}
-
 }

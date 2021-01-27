@@ -32,5 +32,4 @@ public class Task15 {
 		}
 		System.out.println(result);
 	}
-
 }

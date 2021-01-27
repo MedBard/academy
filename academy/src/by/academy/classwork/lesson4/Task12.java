@@ -10,7 +10,7 @@ public class Task12 {
 			if (i % 2 == 1 && i % a == 0) {
 				result *= i;
 			}
-		}
+		} 
 		System.out.println(result);
 	}
 }

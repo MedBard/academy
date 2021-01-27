@@ -10,5 +10,4 @@ public class Task9 {
 		}
 
 	}
-
 }

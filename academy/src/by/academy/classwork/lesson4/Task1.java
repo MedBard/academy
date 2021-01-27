@@ -6,7 +6,5 @@ public class Task1 {
 		for (int i = 10; i <= 20; i++) {
 			System.out.println(i + " * " + i + " =" + (i * i));
 		}
-
 	}
-
 }
