@@ -15,7 +15,6 @@ public class Task2 {
 		numCount = sc.nextInt();
 		array = new String[numCount];
 		symbolCount = new int[numCount];
-
 		System.out.println("Enter words:");
 		for (int i = 0; i < numCount; i++) {
 			array[i] = sc.next();
@@ -29,12 +28,10 @@ public class Task2 {
 				}
 			}
 		}
-
 		for (int i = 0; i < symbolCount.length; i++) {
 			if (symbolCount[i] < symbolCount[res])
 				res = i;
 		}
-
 		System.out.println("Result: " + array[res]);
 		sc.close();
 	}
