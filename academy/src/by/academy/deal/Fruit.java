@@ -33,6 +33,6 @@ public class Fruit extends Product {
 		if (shelfLife > 10) {
 			return FRUIT_DISCOUNT;
 		}
-		return 1;
+		return 0;
 	}
 }

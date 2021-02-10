@@ -1,8 +1,6 @@
 package by.academy.deal;
 
-public class Product {
-	public static int DEFAULT_DISCOUNT = 10;
-
+public abstract class Product {
 	double price;
 	int quantity;
 	String manufacturer;
@@ -52,15 +50,10 @@ public class Product {
 		this.type = type;
 	}
 
-	public final double calcPrice() {
-		return quantity * price * (1 - (double) discount() / 100);
+	public double calcFinalPrice() {
+		return price * (1 - (double) discount() / 100);
 	}
 
-	public int discount() {
-		if (quantity > 10) {
-			return DEFAULT_DISCOUNT;
-		}
-		return 1;
-	};
+	public abstract int discount();
 
 }

@@ -23,6 +23,6 @@ public class Vegetables extends Product {
 		if (origin.equals("BLR")) {
 			return VEGETABLE_DISCOUNT;
 		}
-		return 1;
+		return 0;
 	}
 }

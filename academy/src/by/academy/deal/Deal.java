@@ -87,10 +87,9 @@ public class Deal {
 		System.out.println();
 		for (Product product : products) {
 			if (product != null) {
-				double totalProductPrice = product.calcPrice();
+				double totalProductPrice = product.getQuantity() * product.calcFinalPrice();
 				summ += totalProductPrice;
-				System.out.println(product.getType() + " "
-						+ product.getPrice() * (1 - (double) product.discount() / 100) + " X " + product.getQuantity()
+				System.out.println(product.getType() + " " + product.calcFinalPrice() + " X " + product.getQuantity()
 						+ " = " + totalProductPrice + "(Discount " + product.discount() + "%)");
 			}
 		}
@@ -105,7 +104,7 @@ public class Deal {
 			Product p = products[i];
 			System.out.println("Name: " + p.getType());
 			System.out.println("Manufacturer: " + p.getManufacturer());
-			System.out.println("Total Price: " + p.calcPrice());
+			System.out.println("Total Price: " + p.calcFinalPrice());
 			System.out.println("-----------------");
 		}
 	}
@@ -114,7 +113,7 @@ public class Deal {
 		double sum = 0;
 		for (Product product : products) {
 			if (product != null) {
-				sum += product.getPrice() * product.getQuantity();
+				sum += product.calcFinalPrice() * product.getQuantity();
 			}
 		}
 		if (sum > buyer.getMoney()) {

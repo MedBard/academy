@@ -33,6 +33,6 @@ public class Milk extends Product {
 		if (fat > 2) {
 			return MILK_DISCOUNT;
 		}
-		return 1;
+		return 0;
 	}
 }
