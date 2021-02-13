@@ -1,14 +1,14 @@
 package by.academy.deal;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DealDate {
 	String pattern1 = "\\d{2}-\\d{2}-\\d{4}";
 	String pattern2 = "\\d{2}/\\d{2}/\\d{4}";
 	String date;
-	Date d;
+	LocalDate ld = LocalDate.of(1970, 1, 1);
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 	public DealDate() {
 		super();
@@ -29,24 +29,19 @@ public class DealDate {
 
 	public boolean checkDate() {
 		if (date.matches(pattern1)) {
-			try {
-				d = new SimpleDateFormat("dd-MM-yyyy").parse(date.trim());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			return true;
 		}
 		if (date.matches(pattern2)) {
-			SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
 			return true;
 		}
 		return false;
 	}
 
 	public void printDate() {
-		System.out.println("Day: " + d.getDay());
-		System.out.println("Month: " + d.getMonth());
-		System.out.println("Year: " + d.getYear());
+		ld = ld.plusYears(30);
+		ld = ld.minusMonths(7);
+		ld = ld.minusDays(3);
+		System.out.println(ld);
 	}
 }
