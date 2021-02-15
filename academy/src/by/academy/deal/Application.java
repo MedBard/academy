@@ -23,6 +23,8 @@ public class Application {
 			System.out.println("1: New deal");
 			System.out.println("2: Archive");
 			System.out.println("3: Deal menu");
+			System.out.println("4: Add buyer");
+			System.out.println("5: Add seller");
 			System.out.println("0: Exit");
 			menuChoose = sc.nextInt();
 			switch (menuChoose) {
@@ -30,28 +32,36 @@ public class Application {
 				System.out.println("Enter date of deal:");
 				String gDate = sc.next();
 				deal.setDate(checkDate(gDate, sc));
-				System.out.println("Info about buyer");
-				buyer = personInput(sc);
-				deal.setBuyer(buyer);
-				System.out.println("Info about seller");
-				seller = personInput(sc);
-				deal.setSeller(seller);
 				deal.setDeadLine();
 				archive[dealCount] = deal;
 				deal.deal();
 				dealCount++;
 				break;
 			case 2:
-				for (int i = 0; i < dealCount; i++) {
-					Deal d = archive[i];
-					printDealDate(d.getDate());
-					System.out.println("Buyer: " + d.getBuyer().toString());
-					System.out.println("Seller: " + d.getSeller().toString());
-					d.printProducts();
+				if (archive[0] == null) {
+					System.out.println("Empty history");
+				} else {
+					for (int i = 0; i < dealCount; i++) {
+						Deal d = archive[i];
+						printDealDate(d.getDate());
+						System.out.println("Buyer: " + d.getBuyer().toString());
+						System.out.println("Seller: " + d.getSeller().toString());
+						d.printProducts();
+					}
 				}
 				break;
 			case 3:
 				deal.dealMenu(sc);
+				break;
+			case 4:
+				System.out.println("Info about buyer");
+				buyer = personInput(sc);
+				deal.setBuyer(buyer);
+				break;
+			case 5:
+				System.out.println("Info about seller");
+				seller = personInput(sc);
+				deal.setSeller(seller);
 				break;
 			case 0:
 				menu = false;

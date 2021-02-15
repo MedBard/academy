@@ -78,6 +78,8 @@ public class Deal {
 						}
 					}
 				}
+			} else {
+				System.out.println("No such product in list");
 			}
 			break;
 		case 3:
@@ -143,7 +145,7 @@ public class Deal {
 		if (productCounter != index) {
 			System.arraycopy(products, index + 1, products, index, products.length - index - productCounter);
 		}
-		products[productCounter] = null;
+		products[productCounter - 1] = null;
 		productCounter--;
 	}
 
