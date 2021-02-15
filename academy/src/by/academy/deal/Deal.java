@@ -155,7 +155,8 @@ public class Deal {
 
 	private void printBill() {
 		double summ = 0;
-		System.out.println("Bill " + date);
+		System.out.println("Bill ");
+		DealDate.printDealDate(date);
 		System.out.println();
 		if (buyer != null) {
 			System.out.println("Buyer: " + buyer.toString());
@@ -178,7 +179,7 @@ public class Deal {
 		}
 		System.out.println();
 		System.out.println("Total " + summ);
-		System.out.println(deadLine);
+		System.out.println("Deadline: " + deadLine);
 		buyer.setMoney(buyer.getMoney() - summ);
 		seller.setMoney(seller.getMoney() + summ);
 	}

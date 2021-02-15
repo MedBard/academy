@@ -38,6 +38,7 @@ public class Application {
 				deal.setSeller(seller);
 				deal.setDeadLine();
 				archive[dealCount] = deal;
+				deal.deal();
 				dealCount++;
 				break;
 			case 2:
@@ -45,9 +46,8 @@ public class Application {
 					Deal d = archive[i];
 					printDealDate(d.getDate());
 					System.out.println("Buyer: " + d.getBuyer().toString());
-					System.out.println("Buyer: " + d.getSeller().toString());
+					System.out.println("Seller: " + d.getSeller().toString());
 					d.printProducts();
-					System.out.println("-----------------");
 				}
 				break;
 			case 3:
