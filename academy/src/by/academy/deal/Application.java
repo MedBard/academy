@@ -32,6 +32,13 @@ public class Application {
 				System.out.println("Enter date of deal:");
 				String gDate = sc.next();
 				deal.setDate(checkDate(gDate, sc));
+				System.out.println("Info about buyer");
+				buyer = personInput(sc);
+				deal.setBuyer(buyer);
+				System.out.println("Info about seller");
+				seller = personInput(sc);
+				deal.setSeller(seller);
+				deal.productChoose(sc);
 				deal.setDeadLine();
 				archive[dealCount] = deal;
 				deal.deal();
@@ -43,7 +50,7 @@ public class Application {
 				} else {
 					for (int i = 0; i < dealCount; i++) {
 						Deal d = archive[i];
-						printDealDate(d.getDate());
+						DealDate.printDealDate(d.getDate());
 						System.out.println("Buyer: " + d.getBuyer().toString());
 						System.out.println("Seller: " + d.getSeller().toString());
 						d.printProducts();
@@ -53,16 +60,6 @@ public class Application {
 			case 3:
 				deal.dealMenu(sc);
 				break;
-			case 4:
-				System.out.println("Info about buyer");
-				buyer = personInput(sc);
-				deal.setBuyer(buyer);
-				break;
-			case 5:
-				System.out.println("Info about seller");
-				seller = personInput(sc);
-				deal.setSeller(seller);
-				break;
 			case 0:
 				menu = false;
 				sc.close();
@@ -71,11 +68,6 @@ public class Application {
 				break;
 			}
 		}
-	}
-
-	private static void printDealDate(Date date) {
-		// TODO Auto-generated method stub
-
 	}
 
 	static Person personInput(Scanner sc) {
@@ -118,6 +110,7 @@ public class Application {
 			} else {
 				System.out.print("Enter correct phone number:");
 				tmp = sc.next().trim();
+				check = apv.validate(tmp) | bpv.validate(tmp);
 			}
 		} while (!check);
 		System.out.print("Enter email:");

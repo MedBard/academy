@@ -42,30 +42,7 @@ public class Deal {
 		int tmp = sc.nextInt();
 		switch (tmp) {
 		case 1:
-			System.out.println("Choose product:");
-			System.out.println("1: Add Vegetables");
-			System.out.println("2: Add Milk");
-			System.out.println("3: Add Fruit");
-			int productChoose = sc.nextInt();
-			switch (productChoose) {
-			case 1:
-				System.out.println("Print quantity");
-				int qty = sc.nextInt();
-				addProduct(new Vegetables(50, "Carrot", "AgroHolding", qty, "BLR"));
-				break;
-			case 2:
-				System.out.println("Print quantity");
-				qty = sc.nextInt();
-				addProduct(new Milk(80, "Milk", "Cow", qty, 2.5, 1.0));
-				break;
-			case 3:
-				System.out.println("Print quantity");
-				qty = sc.nextInt();
-				addProduct(new Fruit(80, "Orange", "BananaInc", qty, "ECU", 25));
-				break;
-			default:
-				break;
-			}
+			productChoose(sc);
 			break;
 		case 2:
 			System.out.println("Print what to delete");
@@ -187,13 +164,17 @@ public class Deal {
 	}
 
 	public void printProducts() {
+		double sum = 0;
 		for (int i = 0; i < productCounter; i++) {
 			Product p = products[i];
+			sum += p.calcFinalPrice() * p.getQuantity();
 			System.out.println("Name: " + p.getType());
 			System.out.println("Manufacturer: " + p.getManufacturer());
-			System.out.println("Total Price: " + p.calcFinalPrice());
+			System.out.println("Quantity: " + p.getQuantity());
+			System.out.println("Price: " + p.calcFinalPrice() * p.getQuantity());
 			System.out.println("-----------------");
 		}
+		System.out.println("Total price: " + sum);
 	}
 
 	public LocalDate getDeadLine() {
@@ -223,4 +204,39 @@ public class Deal {
 			System.out.println();
 		}
 	}
+
+	void productChoose(Scanner sc) {
+		boolean repeat = true;
+		do {
+			System.out.println("Choose product:");
+			System.out.println("1: Add Vegetables");
+			System.out.println("2: Add Milk");
+			System.out.println("3: Add Fruit");
+			System.out.println("4: Exit");
+			int productChoose = sc.nextInt();
+			switch (productChoose) {
+			case 1:
+				System.out.println("Print quantity");
+				int qty = sc.nextInt();
+				addProduct(new Vegetables(50, "Carrot", "AgroHolding", qty, "BLR"));
+				break;
+			case 2:
+				System.out.println("Print quantity");
+				qty = sc.nextInt();
+				addProduct(new Milk(80, "Milk", "Cow", qty, 2.5, 1.0));
+				break;
+			case 3:
+				System.out.println("Print quantity");
+				qty = sc.nextInt();
+				addProduct(new Fruit(80, "Orange", "BananaInc", qty, "ECU", 25));
+				break;
+			case 4:
+				repeat = false;
+				break;
+			default:
+				break;
+			}
+		} while (repeat);
+	}
+
 }
