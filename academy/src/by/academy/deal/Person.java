@@ -17,6 +17,15 @@ public class Person {
 		this.money = money;
 	}
 
+	public Person(String name, double money, String dateOfBirth, String phone, String email) {
+		super();
+		this.name = name;
+		this.money = money;
+		this.dateOfBirth = dateOfBirth;
+		this.phone = phone;
+		this.email = email;
+	}
+
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -51,6 +60,12 @@ public class Person {
 
 	public double getMoney() {
 		return money;
+	}
+
+	@Override
+	public String toString() {
+		return "(name=" + name + ", money=" + money + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", email="
+				+ email + ")";
 	}
 
 	public void setMoney(double money) {

@@ -1,47 +1,44 @@
 package by.academy.deal;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class DealDate {
-	String pattern1 = "\\d{2}-\\d{2}-\\d{4}";
-	String pattern2 = "\\d{2}/\\d{2}/\\d{4}";
-	String date;
+	static SimpleDateFormat df = new SimpleDateFormat("'Day: '<dd> \n'Month: '<MM>' \nYear: '<yyyy>");
 	LocalDate ld = LocalDate.of(1970, 1, 1);
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	
+	Date date;
 
 	public DealDate() {
 		super();
 	}
 
-	public DealDate(String date) {
+	public DealDate(Date date) {
 		super();
 		this.date = date;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public boolean checkDate() {
-		if (date.matches(pattern1)) {
-			
-			return true;
+	public Date parceDate(String date, String pattern) {
+		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+		try {
+			this.date = formatter.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (date.matches(pattern2)) {
-			return true;
-		}
-		return false;
+		return this.date;
 	}
-
-	public void printDate() {
-		ld = ld.plusYears(30);
-		ld = ld.minusMonths(7);
-		ld = ld.minusDays(3);
-		System.out.println(ld);
+	static public void printDealDate(Date date) {
+		System.out.println(df.format(date));
 	}
 }
