@@ -1,18 +1,21 @@
 package by.academy.deal;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Deal {
 	public final static int DEFAULT_PRODUCT_SIZE = 3;
+	static final String MAIN_MENU_OUTPUT = "1: Add product \n2: Delete product \n3: Info \n0: Exit";
+	static final String PRODUCT_MENU = "Choose product: \n1: Add Vegetables \n2: Add Milk \n3: Add Fruit \n0: Exit";
 
-	Date date;
-	Person seller;
-	Person buyer;
-	Product[] products;
-	int productCounter = 0;
-	LocalDate deadLine;
+	private Date date;
+	private Person seller;
+	private Person buyer;
+	private Product[] products;
+	private int productCounter = 0;
+	private LocalDate deadLine;
 
 	public Deal() {
 		super();
@@ -25,50 +28,6 @@ public class Deal {
 		this.buyer = buyer;
 		this.products = products;
 		this.deadLine = deadLine;
-	}
-
-	public Deal(Date date, Person seller, Person buyer) {
-		super();
-		this.date = date;
-		this.seller = seller;
-		this.buyer = buyer;
-	}
-
-	public void dealMenu(Scanner sc) {
-		System.out.println("1: Add product");
-		System.out.println("2: Delete product");
-		System.out.println("3: Info");
-		System.out.println("0: Return");
-		int tmp = sc.nextInt();
-		switch (tmp) {
-		case 1:
-			productChoose(sc);
-			break;
-		case 2:
-			System.out.println("Print what to delete");
-			String del = sc.next();
-			if (products != null) {
-				for (int i = 0; i < products.length; i++) {
-					if (products[i] != null) {
-						if (products[i].getType().equals(del)) {
-							deleteProduct(i);
-						}
-					}
-				}
-			} else {
-				System.out.println("No such product in list");
-			}
-			break;
-		case 3:
-			printBill();
-			break;
-		case 0:
-
-			break;
-
-		default:
-			break;
-		}
 	}
 
 	public Date getDate() {
@@ -101,6 +60,47 @@ public class Deal {
 
 	public void setProducts(Product[] products) {
 		this.products = products;
+	}
+
+	public LocalDate getDeadLine() {
+		return deadLine;
+	}
+
+	public void setDeadLine() {
+		this.deadLine = LocalDate.now();
+		this.deadLine.plusDays(10);
+	}
+
+	public void dealMenu(Scanner sc) {
+		System.out.println(MAIN_MENU_OUTPUT);
+		int tmp = sc.nextInt();
+		switch (tmp) {
+		case 1:
+			productChoose(sc);
+			break;
+		case 2:
+			System.out.println("Print what to delete");
+			String del = sc.next();
+			if (products != null) {
+				for (int i = 0; i < products.length; i++) {
+					if (products[i] != null) {
+						if (products[i].getType().equals(del)) {
+							deleteProduct(i);
+						}
+					}
+				}
+			} else {
+				System.out.println("No such product in list\n");
+			}
+			break;
+		case 3:
+			printBill();
+			break;
+		case 0:
+			break;
+		default:
+			break;
+		}
 	}
 
 	public void addProduct(Product product) {
@@ -158,7 +158,8 @@ public class Deal {
 		}
 		System.out.println();
 		System.out.println("Total " + summ);
-		System.out.println("Deadline: " + deadLine);
+		System.out.println("Deadline: " + DealDate
+				.dateToString(java.util.Date.from(deadLine.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())));
 		buyer.setMoney(buyer.getMoney() - summ);
 		seller.setMoney(seller.getMoney() + summ);
 	}
@@ -167,6 +168,8 @@ public class Deal {
 		double sum = 0;
 		for (int i = 0; i < productCounter; i++) {
 			Product p = products[i];
+			Date dl = java.sql.Date.valueOf(getDeadLine());
+			System.out.println("Deadline: " + DealDate.dateToString(dl));
 			sum += p.calcFinalPrice() * p.getQuantity();
 			System.out.println("Name: " + p.getType());
 			System.out.println("Manufacturer: " + p.getManufacturer());
@@ -175,15 +178,6 @@ public class Deal {
 			System.out.println("-----------------");
 		}
 		System.out.println("Total price: " + sum);
-	}
-
-	public LocalDate getDeadLine() {
-		return deadLine;
-	}
-
-	public void setDeadLine() {
-		this.deadLine = LocalDate.now();
-		this.deadLine.plusDays(10);
 	}
 
 	public void deal() {
@@ -208,29 +202,22 @@ public class Deal {
 	void productChoose(Scanner sc) {
 		boolean repeat = true;
 		do {
-			System.out.println("Choose product:");
-			System.out.println("1: Add Vegetables");
-			System.out.println("2: Add Milk");
-			System.out.println("3: Add Fruit");
-			System.out.println("4: Exit");
+			System.out.println(PRODUCT_MENU);
 			int productChoose = sc.nextInt();
 			switch (productChoose) {
 			case 1:
-				System.out.println("Print quantity");
-				int qty = sc.nextInt();
-				addProduct(new Vegetables(50, "Carrot", "AgroHolding", qty, "BLR"));
+				Vegetables v = new Vegetables();
+				addProduct(v.createVegetable(sc));
 				break;
 			case 2:
-				System.out.println("Print quantity");
-				qty = sc.nextInt();
-				addProduct(new Milk(80, "Milk", "Cow", qty, 2.5, 1.0));
+				Milk m = new Milk();
+				addProduct(m.createMilk(sc));
 				break;
 			case 3:
-				System.out.println("Print quantity");
-				qty = sc.nextInt();
-				addProduct(new Fruit(80, "Orange", "BananaInc", qty, "ECU", 25));
+				Fruit f = new Fruit();
+				addProduct(f.createFruit(sc));
 				break;
-			case 4:
+			case 0:
 				repeat = false;
 				break;
 			default:
@@ -239,4 +226,17 @@ public class Deal {
 		} while (repeat);
 	}
 
+	public void createDeal(Scanner sc) {
+		System.out.println("Enter date of deal:");// Take date
+		String gDate = sc.next();
+		setDate(DealDate.checkDate(gDate, sc));
+		System.out.println("Info about buyer");// Take buyer
+		buyer = Person.personInput(sc);
+		setBuyer(buyer);
+		System.out.println("Info about seller");// Take seller
+		seller = Person.personInput(sc);
+		setSeller(seller);
+		productChoose(sc); // add products
+		setDeadLine(); // set deadline
+	}
 }

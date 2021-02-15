@@ -1,9 +1,12 @@
 package by.academy.deal;
 
+import java.util.Date;
+import java.util.Scanner;
+
 public class Person {
 	String name;
 	double money;
-	String dateOfBirth;
+	Date dateOfBirth;
 	String phone;
 	String email;
 
@@ -17,7 +20,7 @@ public class Person {
 		this.money = money;
 	}
 
-	public Person(String name, double money, String dateOfBirth, String phone, String email) {
+	public Person(String name, double money, Date dateOfBirth, String phone, String email) {
 		super();
 		this.name = name;
 		this.money = money;
@@ -26,11 +29,11 @@ public class Person {
 		this.email = email;
 	}
 
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -62,14 +65,58 @@ public class Person {
 		return money;
 	}
 
-	@Override
-	public String toString() {
-		return "(name=" + name + ", money=" + money + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", email="
-				+ email + ")";
-	}
-
 	public void setMoney(double money) {
 		this.money = money;
 	}
 
+	@Override
+	public String toString() {
+		if (dateOfBirth != null) {
+			return "(Name: " + name + ", money: " + money + ", dateOfBirth: " + DealDate.dateToString(dateOfBirth)
+					+ ", phone: " + phone + ", email: " + email + ")";
+		} else {
+			return "No data";
+		}
+	}
+
+	static Person personInput(Scanner sc) {
+		Person p = new Person();
+		String gDate;
+		AmericanPhoneValidator apv = new AmericanPhoneValidator();
+		BelarusPhoneValidator bpv = new BelarusPhoneValidator();
+		EmailValidator ev = new EmailValidator();
+
+		System.out.print("Enter name :");
+		p.setName(sc.next());
+		System.out.print("Enter money:");
+		p.setMoney(sc.nextDouble());
+		System.out.print("Enter birthday:");
+		gDate = sc.next().trim();
+		p.setDateOfBirth(DealDate.checkDate(gDate, sc));
+		System.out.print("Enter phone number:");
+		String tmp = sc.next().trim();
+		boolean check = apv.validate(tmp) | bpv.validate(tmp);
+		do {
+			if (check) {
+				p.setPhone(tmp);
+				break;
+			} else {
+				System.out.print("Enter correct phone number:");
+				tmp = sc.next().trim();
+				check = apv.validate(tmp) | bpv.validate(tmp);
+			}
+		} while (!check);
+		System.out.print("Enter email:");
+		tmp = sc.next().trim();
+		do {
+			if (ev.validate(tmp)) {
+				p.setEmail(tmp);
+				break;
+			} else {
+				System.out.print("Enter correct email:");
+				tmp = sc.next().trim();
+			}
+		} while (!ev.validate(tmp));
+		return p;
+	}
 }
