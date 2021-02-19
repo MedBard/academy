@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Person {
-	String name;
-	double money;
-	Date dateOfBirth;
-	String phone;
-	String email;
+	private String name;
+	private double money;
+	private Date dateOfBirth;
+	private String phone;
+	private String email;
 
 	public Person() {
 		super();
@@ -119,4 +119,54 @@ public class Person {
 		} while (!ev.validate(tmp));
 		return p;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(money);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Person))
+			return false;
+		Person other = (Person) obj;
+		if (dateOfBirth == null) {
+			if (other.dateOfBirth != null)
+				return false;
+		} else if (!dateOfBirth.equals(other.dateOfBirth))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (Double.doubleToLongBits(money) != Double.doubleToLongBits(other.money))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (!other.equals(obj)) {
+			return false;
+		}
+		return true;
+	}
+
 }

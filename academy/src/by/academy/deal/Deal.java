@@ -2,6 +2,7 @@ package by.academy.deal;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -239,4 +240,58 @@ public class Deal {
 		productChoose(sc); // add products
 		setDeadLine(); // set deadline
 	}
+
+	@Override
+	public String toString() {
+		return "Deal [date=" + date + ", seller=" + seller + ", buyer=" + buyer + ", products="
+				+ Arrays.toString(products) + ", productCounter=" + productCounter + ", deadLine=" + deadLine + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((buyer == null) ? 0 : buyer.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((deadLine == null) ? 0 : deadLine.hashCode());
+		result = prime * result + productCounter;
+		result = prime * result + Arrays.hashCode(products);
+		result = prime * result + ((seller == null) ? 0 : seller.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Deal))
+			return false;
+		Deal other = (Deal) obj;
+		if (buyer == null) {
+			if (other.buyer != null)
+				return false;
+		} else if (!buyer.equals(other.buyer))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (deadLine == null) {
+			if (other.deadLine != null)
+				return false;
+		} else if (!deadLine.equals(other.deadLine))
+			return false;
+		if (productCounter != other.productCounter)
+			return false;
+		if (!Arrays.equals(products, other.products))
+			return false;
+		if (seller == null) {
+			if (other.seller != null)
+				return false;
+		} else if (!seller.equals(other.seller))
+			return false;
+		return true;
+	}
+
 }

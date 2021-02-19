@@ -45,7 +45,7 @@ public class Milk extends Product {
 		}
 		return 0;
 	}
-	
+
 	public Milk createMilk(Scanner sc) {
 		System.out.println("Enter price");
 		this.setPrice(sc.nextDouble());
@@ -60,5 +60,42 @@ public class Milk extends Product {
 		System.out.println("Enter volume of bottle");
 		this.setVolume(sc.nextDouble());
 		return this;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(fat);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(volume);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Milk))
+			return false;
+		Milk other = (Milk) obj;
+		if (Double.doubleToLongBits(fat) != Double.doubleToLongBits(other.fat))
+			return false;
+		if (Double.doubleToLongBits(volume) != Double.doubleToLongBits(other.volume))
+			return false;
+		if (!other.equals(obj)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Milk [fat=" + fat + ", volume=" + volume + "price=" + super.getPrice() + ", quantity="
+				+ super.getQuantity() + ", manufacturer=" + super.getManufacturer() + ", type=" + super.getType() + "]";
 	}
 }

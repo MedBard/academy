@@ -1,6 +1,11 @@
 package by.academy.deal;
 
+import java.util.regex.Pattern;
+
 public interface Validator {
 
-	public boolean validate(String num);
+	default boolean validate(String num) {
+		return getPattern().matcher(num).matches();
+	}
+	public Pattern getPattern();
 }
