@@ -25,7 +25,7 @@ public class Gen<T> {
 
 	public void remove(int i) {
 		if (i > counter || i < 0) {
-			System.out.println("Index of bound");
+			System.out.println("Incorrect choose");
 			return;
 		}
 		T[] copy = Arrays.copyOfRange(array, i + 1, counter);
