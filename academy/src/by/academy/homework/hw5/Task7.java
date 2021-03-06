@@ -62,8 +62,19 @@ public class Task7 {
 	 *
 	 */
 	public static DoublyLinkedListNode reverse(DoublyLinkedListNode head) {
-
-		return null;
+		if (head == null) {
+			return null;
+		}
+		while (head != null) {
+			DoublyLinkedListNode tmp = head.prev;
+			head.prev = head.next;
+			head.next = tmp;
+			if (head.prev == null) {
+				return head;
+			}
+			head = head.prev;
+		}
+		return head;
 	}
 
 	private static final Scanner scanner = new Scanner(System.in);
