@@ -2,6 +2,7 @@ package by.academy.homework.hw7;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 
 public class Task2 {
 
@@ -39,8 +40,31 @@ public class Task2 {
 		for (Field field : declaredFields) {
 			System.out.println(field);
 		}
-
 		
+		declaredField = pClass.getDeclaredField("firstName");
+		declaredField.setAccessible(true);
+		pField.set(p, "123");
+		pField = pClass.getField("lasttName");
+		declaredField.set(p, "123");
+		declaredField = pClass.getDeclaredField("age");
+		declaredField.setAccessible(true);
+		declaredField.set(p, 123);
+		declaredField = pClass.getDeclaredField("dateOfBirth");
+		declaredField.setAccessible(true);
+		declaredField.set(p, LocalDate.of(1989,01,01));
+		
+		declaredField = uClass.getDeclaredField("login");
+		declaredField.setAccessible(true);
+		declaredField.set(u, "123");
+		declaredField = uClass.getDeclaredField("password");
+		declaredField.setAccessible(true);
+		declaredField.set(u, "123");
+		declaredField = uClass.getDeclaredField("email");
+		declaredField.setAccessible(true);
+		declaredField.set(u, "123");
+		
+		System.out.println(u.toString());
+		System.out.println(p.toString());
 	}
 
 }

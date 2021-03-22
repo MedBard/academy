@@ -5,15 +5,14 @@ import java.time.LocalDate;
 public class Person {
 	private String firstName;
 	public String lasttName;
-
+	private int age;
+	private LocalDate dateOfBirth;
+	
 	@Override
 	public String toString() {
 		return "Person [firstName=" + firstName + ", lasttName=" + lasttName + ", age=" + age + ", dateOfBirth="
 				+ dateOfBirth + "]";
 	}
-
-	private int age;
-	private LocalDate dateOfBirth;
 
 	public String getFirstName() {
 		return firstName;
